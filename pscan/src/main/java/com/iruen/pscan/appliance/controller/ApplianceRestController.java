@@ -25,6 +25,7 @@ import com.iruen.pscan.appliance.service.NoticeService;
 import com.iruen.pscan.service.CommonService;
 import com.iruen.pscan.util.FileUtil;
 import com.iruen.pscan.util.SecureUtil;
+import com.iruen.pscan.vo.CheckFileResultInfo;
 import com.iruen.pscan.vo.CheckParam;
 import com.iruen.pscan.vo.Notice;
 import com.iruen.pscan.vo.PSCANSession;
@@ -149,9 +150,11 @@ public class ApplianceRestController {
 				.currentRequestAttributes();
 		HttpSession session = servletRequestAttribute.getRequest().getSession(true);
 		
-		appService.documentChecker(session, param);
+		List<CheckFileResultInfo> checkMapList = appService.documentChecker(session, param);
 		
-		//res.setData(patterns);
+		session.setAttribute("checkMapList", checkMapList);
+		
+		res.setData(checkMapList);
 		res.setStatus("OK");
 		return res;
 	}
@@ -174,23 +177,28 @@ public class ApplianceRestController {
 		
 	}
 	
-	@PostMapping("/api/noticeWrite")
-	public Response noticeWrite(@RequestBody Notice notice) throws IOException {
-		Response res	= new Response();
-		
-		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder
-				.currentRequestAttributes();
-		HttpSession session = servletRequestAttribute.getRequest().getSession(true);
-		PSCANSession user = (PSCANSession)session.getAttribute("Session");
-		
-		notice.setReg_id(user.getUserId());
-		int cnt = noticeService.noticeWrite(notice);
-		if (cnt == 1) {
-			res.setStatus("OK");
-			res.setData(notice);
-		}
-		return res;
-		
+	@PostMapping("/api/createNotice")
+	public Response createNotice(@RequestBody Notice notice) throws IOException {
+		logger.debug("/api/createNotice .. "); 
+		return noticeService.createNotice(notice);	
+	}
+	
+	@PostMapping("/api/updateNotice")
+	public Response updateNotice(@RequestBody Notice notice) {
+		logger.debug("/api/updateNotice .. "); 
+		return noticeService.updateNotice(notice);
+	}
+	
+	@PostMapping("/api/deleteNotice")
+	public Response deleteNotice(@RequestBody Notice notice) {
+		logger.debug("/api/deleteNotice .. "); 
+		return noticeService.deleteNotice(notice);
+	}
+	
+	@PostMapping("/api/searchNotice")
+	public Response searchNotice(@RequestBody HashMap<String, String> map) {
+		logger.debug("/api/searchNotice .. "); 
+		return noticeService.searchNotice(map);
 	}
 	
 }
