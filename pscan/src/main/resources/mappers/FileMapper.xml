@@ -192,4 +192,33 @@
 		)
 	</insert>
 	
+	<resultMap id="checkFileMap" type="com.iruen.pscan.vo.CheckFileResultInfo">
+		<result property="check_file_id" 	column="check_file_id"/>
+		<result property="org_name" 		column="org_name"/>
+		<result property="ext" 				column="ext"/>
+		<result property="save_path" 		column="save_path"/>
+		<result property="name" 			column="name"/>
+		<result property="check_cnt" 		column="check_cnt"/>
+		<result property="userId" 			column="userId"/>
+		<result property="userName" 		column="userName"/>
+		<result property="regdt" 			column="regdt"/>
+	</resultMap>
+	
+	<select id="checkFileList" parameterType="com.iruen.pscan.vo.User" resultMap="checkFileMap">
+		SELECT c.check_file_id
+		     , f.org_name
+		     , f.ext
+		     , f.save_path
+		     , f.name 
+		     , c.check_cnt
+		     , u.userId
+		     , u.name as userName
+		     , DATE_FORMAT(c.reg_dt, '%Y-%m-%d') as regdt
+		  FROM  check_files c 
+		 INNER JOIN files f ON c.file_id = f.file_id
+		 INNER JOIN user u ON f.user_idx = u.idx
+		 WHERE u.userId = #{userId}
+		 ORDER BY c.reg_dt desc
+	</select>
+	
 </mapper>

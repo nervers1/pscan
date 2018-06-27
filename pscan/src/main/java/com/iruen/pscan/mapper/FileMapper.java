@@ -6,9 +6,11 @@ package com.iruen.pscan.mapper;
 import java.util.List;
 
 import com.iruen.pscan.vo.CheckFile;
+import com.iruen.pscan.vo.CheckFileResultInfo;
 import com.iruen.pscan.vo.CheckParam;
 import com.iruen.pscan.vo.CheckResultDtl;
 import com.iruen.pscan.vo.UploadFile;
+import com.iruen.pscan.vo.User;
 
 /**
  * @author nerve
@@ -33,4 +35,7 @@ public interface FileMapper {
 	public int createCheckResult(CheckResultDtl result);
 	
 	public int updateFileStatus(UploadFile file);
+	
+	public List<CheckFileResultInfo> checkFileList(User user);
+	
 }

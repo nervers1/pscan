@@ -8,9 +8,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.iruen.pscan.vo.CheckFileResultInfo;
+import com.iruen.pscan.vo.CheckParam;
 import com.iruen.pscan.vo.PSCANSession;
 import com.iruen.pscan.vo.Policy;
-import com.iruen.pscan.vo.CheckParam;
 import com.iruen.pscan.vo.UploadFile;
 import com.iruen.pscan.vo.User;
 
@@ -37,6 +38,6 @@ public interface ApplianceCommonService {
 
 	public FileList getFileList(CheckParam param);
 
-	public void documentChecker(HttpSession session, CheckParam param) throws IOException;
+	public List<CheckFileResultInfo> documentChecker(HttpSession session, CheckParam param) throws IOException;
 	
 }

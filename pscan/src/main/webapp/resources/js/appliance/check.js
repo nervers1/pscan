@@ -135,7 +135,10 @@ check.buttonCheck = function(e) {
 		data : JSON.stringify(params),
 		contentType : "application/json; charset=UTF-8",
 		success : function(result) {
-			alert(result);
+			if (result.status == 'OK') {
+				check.checkResult = result.data;
+				alert(check.checkResult);
+			}
 		},
 		error : function(e) {
 			alert('개인정보를 검출하지 못했습니다.');

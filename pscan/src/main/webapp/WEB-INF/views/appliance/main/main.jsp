@@ -18,6 +18,10 @@
 <link type="text/css" rel="stylesheet" href="/resources/jsgrid-1.5.3/jsgrid.min.css" />
 <link type="text/css" rel="stylesheet" href="/resources/jsgrid-1.5.3/jsgrid-theme.min.css" />
 	</c:when>
+	<c:when test="${contents eq 'notice'}">
+<link type="text/css" rel="stylesheet" href="/resources/jsgrid-1.5.3/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="/resources/jsgrid-1.5.3/jsgrid-theme.min.css" />
+	</c:when>
 </c:choose>
 <link href="/resources/css/appliance/style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -43,6 +47,9 @@
 	</c:when>
 	<c:when test="${contents eq 'user'}">
 		<c:import url="/appliance/memberAdmin"/>
+	</c:when>
+	<c:when test="${contents eq 'notice'}">
+		<c:import url="/appliance/noticeAdmin"/>
 	</c:when>
 </c:choose>
 </section>

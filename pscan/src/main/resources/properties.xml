@@ -3,12 +3,12 @@
 <properties>
 	<comment>jdbc.connectionInfo</comment>
 	<entry key="jdbc.driverClassName">org.mariadb.jdbc.Driver</entry>
-	<entry key="jdbc.url">jdbc:mariadb://localhost:3306/test</entry>
+	<entry key="jdbc.url">jdbc:mariadb://localhost:3306/pscan</entry>
 	<entry key="jdbc.username">root</entry>
-	<entry key="jdbc.password">root</entry>
+	<entry key="jdbc.password">iruen2011</entry>
 	<entry key="path.originalFileDelete">Y</entry>
-	<entry key="path.dirs">D:\pscan\files</entry>
-	<entry key="path.replaceDirs">D:\pscan\replaced</entry>
+	<entry key="path.dirs">c:\pscan\files</entry>
+	<entry key="path.replaceDirs">c:\pscan\replaced</entry>
 	<entry key="path.prefix"></entry>
 	<entry key="path.surfix"></entry>
 	<entry key="user.defaultpassword">iruen1111</entry>

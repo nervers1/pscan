@@ -8,7 +8,7 @@ notice.convert = function (str) {
 	return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
 };
 
-// 공지사항 저장 버튼 클릭 이벤트
+//공지사항 저장 버튼 클릭 이벤트
 $(document).on('click', '.btn-notice-save', function(){
 	notice.param = {};
 	notice.param.title = $('input#title').val();
@@ -26,23 +26,27 @@ $(document).on('click', '.btn-notice-save', function(){
 	}
 
 	$.ajax({
-		url : "/api/noticeWrite",
+		url : "/api/createNotice",
 		type: "POST",
 		dataType : 'JSON',
 		data : JSON.stringify(notice.param),
 		contentType : "application/json; charset=UTF-8",
 		success : function(result) {
-			alert(result.status);
+			alert('공지사항을 등록하였습니다.');
+			window.opener.location.reload(true);
+			window.close();
 		},
 		error : function(e) {
-			alert('사용자를 검색하는 도중 오류가 발생했습니다.');
+			alert('공지사항을 등록하는 도중 오류가 발생했습니다.');
 		}
 		
 	});
 });
 
-// 공지사항 취소버튼 클릭이벤트(이전 페이지로 돌아감)
+//공지사항 취소버튼 클릭이벤트(이전 페이지로 돌아감)
 $(document).on('click', '.btn-notice-cancel', function(){
-	alert(notice.convert(notice.param.content));
-	
+	if (confirm("공지사항 등록을 취소하시겠습니까?")) {
+		window.close();	
+	};
+		
 });

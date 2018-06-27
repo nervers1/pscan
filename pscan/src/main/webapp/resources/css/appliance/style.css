@@ -487,6 +487,43 @@ body {
 	opacity: 0.5!important; filter:alpha(opacity=50);
 }
 
+.menu_item_notice {
+	z-index: 1;
+	position:relative;
+	float: left;
+	width: 200px;
+	height: 200px;
+	background-color: #CCCCCCb0;
+	margin: 0px 30px 20px 30px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+	text-align: center;
+   -moz-box-shadow:    inset 0 0 15px #000000;
+   -webkit-box-shadow: inset 0 0 15px #000000;
+    box-shadow:         inset 0 0 15px #000000;
+}
+
+.menu_item_notice:after {
+	z-index: -1;
+	position:absolute;
+	top:0;
+	left:0;
+	content:"";	
+	float: left;
+	width: 200px;
+	height: 200px;
+	background-color: #eeeeee;
+	margin: 0px 0px 0px;
+	text-align: center;
+	background-image: url("/resources/images/appliance/gear1.jpg");
+    background-size: 200px 200px;
+    background-repeat: no-repeat;
+	opacity: 0.5!important; filter:alpha(opacity=50);
+}
+
+
 .menu_item_setting {
 	z-index: 1;
 	position:relative;
@@ -569,10 +606,10 @@ body {
 	-webkit-text-shadow: 0 0 5px #fff;
 }
 
-.menu_item_dashboard:hover, .menu_item_member:hover, .menu_item_policy:hover, .menu_item_history:hover, .menu_item_setting:hover {
+.menu_item_dashboard:hover, .menu_item_member:hover, .menu_item_policy:hover, .menu_item_history:hover, .menu_item_notice:hover, .menu_item_setting:hover {
 /* 	box-shadow: 10px 10px 5px #cccccc; */
 }	
-.menu_item_dashboard:hover .menu_title, .menu_item_document:hover .menu_title, .menu_item_member:hover .menu_title, .menu_item_policy:hover .menu_title, .menu_item_history:hover .menu_title, .menu_item_setting:hover .menu_title {
+.menu_item_dashboard:hover .menu_title, .menu_item_document:hover .menu_title, .menu_item_member:hover .menu_title, .menu_item_policy:hover .menu_title, .menu_item_history:hover .menu_title, .menu_item_notice:hover .menu_title, .menu_item_setting:hover .menu_title {
 	line-height: 200px;
 	font-weight: bold;
 	color : #fff;

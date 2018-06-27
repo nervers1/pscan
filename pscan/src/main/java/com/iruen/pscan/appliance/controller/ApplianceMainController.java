@@ -328,4 +328,23 @@ public class ApplianceMainController {
 		return "appliance/main/main";
 	}
 	
+	/**
+	 * 공지사항관리(Admin)
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/notice", method = RequestMethod.GET) 
+	public String notice(Model model, HttpSession session) throws Exception {
+		PSCANSession pss = (PSCANSession)session.getAttribute("Session");
+		if (pss != null && "Y".equals(pss.getAdminYn())) {
+			model.addAttribute("contents", "noticeManager");
+		} else {
+			model.addAttribute("contents", "notice");
+		}
+		
+		return "bbs/notice";
+	}
+	
+	
 }

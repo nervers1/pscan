@@ -14,6 +14,8 @@
 <link href="/resources/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/css/appliance/style.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="/resources/jsgrid-1.5.3/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="/resources/jsgrid-1.5.3/jsgrid-theme.min.css" />
 </head>
 <body>
 <div id="content">
@@ -52,6 +54,7 @@
 <script type="text/javascript" src="/resources/js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/jQueryFileUpload/js/vendor/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/resources/js/appliance/main.js"></script>
+<script type="text/javascript" src="/resources/jsgrid-1.5.3/jsgrid.min.js"></script>
 <c:choose>
 	<c:when test="${contents eq 'notice'}">
 <script type="text/javascript" src="/resources/js/appliance/notice.js"></script>
@@ -64,9 +67,6 @@
 	</c:when>
 	<c:when test="${contents eq 'noticeView'}">
 <script type="text/javascript" src="/resources/js/appliance/noticeView.js"></script>
-	</c:when>
-	<c:when test="${contents eq 'noticeWrite'}">
-<script type="text/javascript" src="/resources/js/appliance/noticeWrite.js"></script>
 	</c:when>
 </c:choose>
 </body>

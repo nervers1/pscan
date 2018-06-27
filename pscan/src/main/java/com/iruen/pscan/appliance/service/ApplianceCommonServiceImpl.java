@@ -16,15 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.iruen.pscan.mapper.FileMapper;
 import com.iruen.pscan.mapper.PolicyMapper;
 import com.iruen.pscan.vo.CheckFile;
+import com.iruen.pscan.vo.CheckFileResultInfo;
 import com.iruen.pscan.vo.CheckParam;
 import com.iruen.pscan.vo.CheckResultDtl;
-import com.iruen.pscan.vo.CheckResultInfo;
 import com.iruen.pscan.vo.PSCANSession;
 import com.iruen.pscan.vo.Policy;
 import com.iruen.pscan.vo.UploadFile;
@@ -128,8 +126,8 @@ public class ApplianceCommonServiceImpl implements ApplianceCommonService {
 
 	@Override
 	@Transactional
-	public void documentChecker(HttpSession session, CheckParam param) throws IOException {
-
+	public List<CheckFileResultInfo> documentChecker(HttpSession session, CheckParam param) throws IOException {
+		
 		// 세션에서 등록자 정보 
 		PSCANSession admin = (PSCANSession)session.getAttribute("Session");
 		
@@ -222,6 +220,13 @@ public class ApplianceCommonServiceImpl implements ApplianceCommonService {
 				}
 			}
 		}
+		
+		User user = new User();
+		user.setUserId(admin.getUserId());
+		
+		List<CheckFileResultInfo> checkMapList = fileMapper.checkFileList(user);
+		
+		return checkMapList;
 
 	}
 
