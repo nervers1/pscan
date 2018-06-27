@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.iruen.pscan.vo.Notice;
-import com.iruen.pscan.vo.User;
 
 /**
  * @author nerve

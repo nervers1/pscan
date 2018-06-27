@@ -219,6 +219,7 @@ public class ApplianceMainController {
 	 */
 	@RequestMapping(value = "/policyAdmin", method = RequestMethod.GET)
 	public String policyAdmin(Model model) throws Exception {
+		model.addAttribute("contents", "policy");
 		return "appliance/include/admin/policy";
 	}
 	

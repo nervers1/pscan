@@ -21,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.iruen.pscan.appliance.service.ApplianceCommonService;
 import com.iruen.pscan.appliance.service.ApplianceUserService;
+import com.iruen.pscan.appliance.service.AppliancePolicyService;
 import com.iruen.pscan.appliance.service.NoticeService;
 import com.iruen.pscan.service.CommonService;
 import com.iruen.pscan.util.FileUtil;
@@ -55,6 +56,7 @@ public class ApplianceRestController {
 	@Autowired CommonService common;
 	@Autowired ApplianceCommonService appService;
 	@Autowired ApplianceUserService service;
+	@Autowired AppliancePolicyService policyService;	
 	@Autowired NoticeService noticeService;
 	
 	@PostMapping("/api/login")
@@ -200,5 +202,17 @@ public class ApplianceRestController {
 		logger.debug("/api/searchNotice .. "); 
 		return noticeService.searchNotice(map);
 	}
+	
+	@PostMapping("/api/searchPolicy")
+	public Response searchPolicy(@RequestBody HashMap<String, String> map) {
+		logger.debug("/api/searchPolicy .. "); 
+		return policyService.searchPolicy(map);
+	}
+	
+	@PostMapping("/api/updatePolicy")
+	public Response updatePolicy(@RequestBody Policy policy) {
+		logger.debug("/api/updatePolicy .. "); 
+		return policyService.updatePolicy(policy);
+	}	
 	
 }

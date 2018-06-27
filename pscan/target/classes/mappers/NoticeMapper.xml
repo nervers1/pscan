@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iruen.pscan.mapper.NoticeMapper">
+
+	<resultMap id="noticeMap" type="com.iruen.pscan.vo.Notice" >
+		<result property="notice_no" 	column="notice_no"/>
+		<result property="title" 		column="title"/>
+		<result property="content" 		column="content"/>
+		<result property="use_yn" 		column="use_yn"/>
+		<result property="reg_id" 		column="reg_id"/>
+		<result property="reg_dt" 		column="reg_dt"/>
+		<result property="mod_id" 		column="mod_id"/>
+		<result property="mod_dt" 		column="mod_dt"/>
+	</resultMap>
+	
+
+	<insert id="createNotice" useGeneratedKeys="true" keyProperty="notice_no" parameterType="notice">	
+		INSERT INTO notice (
+			  title
+			, content
+			, reg_id
+			, mod_id
+		) VALUES (
+		  	  #{title}
+			, #{content}
+			, #{reg_id}
+			, #{reg_id}
+		)
+	</insert>
+	
+	<select id="searchNotices" parameterType="notice" resultMap="noticeMap"> 
+		SELECT notice_no
+			 , title
+			 , content
+			 , DATE_FORMAT(reg_dt,'%Y-%m-%d') regdt
+	    FROM notice
+		  <where>
+		  	use_yn = 'Y'
+		  	<if test="type != null and type == 'title'">
+		  		AND title like CONCAT('%', #{text},'%')
+		  	</if>
+		  	<if test="type != null and type == 'content'">
+		  		AND content like CONCAT('%', #{text},'%')
+		  	</if>
+		  </where>
+		 ORDER BY reg_dt DESC
+	</select>
+		
+	<update id="updateNotice" parameterType="notice">
+		UPDATE notice
+		<set>
+			<if test="title != null">title = #{title},</if>
+			<if test="content != null">content = #{content},</if>
+			<if test="mod_id != null">mod_id = #{mod_id},</if>
+		</set>
+		WHERE notice_no = #{notice_no}
+	</update>
+
+	<delete id="deleteNotice" parameterType="notice">
+		UPDATE notice
+		SET use_yn = 'Y', 
+			mod_id = #{mod_id} 
+		WHERE notice_no = #{notice_no}
+	</delete>
+		
+</mapper>
