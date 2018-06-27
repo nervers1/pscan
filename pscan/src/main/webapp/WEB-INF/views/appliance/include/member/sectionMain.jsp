@@ -9,6 +9,7 @@
 				<li class="menu_item_dashboard"><span class="menu_title">대쉬보드</span></li>
 				<li class="menu_item_document"><span class="menu_title">개인정보검출</span></li>
 				<li class="menu_item_history"><span class="menu_title">검출이력</span></li>
+				<li class="menu_item_notice"><span class="menu_title">공지사항</span></li>
 			</ul>
 		</section>
 	</div> 
