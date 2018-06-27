@@ -23,11 +23,15 @@ public class NoticeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 
-	@RequestMapping(value = "/notice", method = RequestMethod.GET) 
-	public String notice(Model model, HttpSession session) throws Exception {
-		model.addAttribute("contents", "notice");
-		return "bbs/notice";
+	@RequestMapping(value = "/bbs/noticeContent", method = RequestMethod.GET) 
+	public String content(Model model) throws Exception {
+		return "bbs/noticeContent";
 	}
+	@RequestMapping(value = "/bbs/noticeManager", method = RequestMethod.GET) 
+	public String manager(Model model) throws Exception {
+		return "bbs/noticeManager";
+	}
+
 	@RequestMapping(value = "/noticeList", method = RequestMethod.GET) 
 	public String noticeList(Model model, HttpSession session) throws Exception {
 		model.addAttribute("contents", "noticeList");
@@ -52,20 +56,6 @@ public class NoticeController {
 	public String noticeView(Model model, HttpSession session) throws Exception {
 		model.addAttribute("contents", "noticeView");
 		return "bbs/notice";
-	}
-	@RequestMapping(value = "/noticeManager", method = RequestMethod.GET) 
-	public String noticeManager(Model model, HttpSession session) throws Exception {
-		model.addAttribute("contents", "noticeManager");
-		return "bbs/notice";
-	}
-	
-	@RequestMapping(value = "/bbs/noticeContent", method = RequestMethod.GET) 
-	public String content(Model model) throws Exception {
-		return "bbs/noticeContent";
-	}
-	@RequestMapping(value = "/bbs/noticeManager", method = RequestMethod.GET) 
-	public String manager(Model model) throws Exception {
-		return "bbs/noticeManager";
 	}
 	@RequestMapping(value = "/bbs/noticeList", method = RequestMethod.GET) 
 	public String list(Model model) throws Exception {

@@ -19,47 +19,30 @@
 			  title
 			, content
 			, reg_id
+			, mod_id
 		) VALUES (
 		  	  #{title}
 			, #{content}
 			, #{reg_id}
+			, #{reg_id}
 		)
 	</insert>
 	
-	<select id="getNotice" parameterType="notice" resultMap="noticeMap"> 
+	<select id="searchNotices" parameterType="notice" resultMap="noticeMap"> 
 		SELECT notice_no
 			 , title
 			 , content
-			 , use_yn
-			 , reg_id
-			 , reg_dt
-			 , mod_id
-			 , mod_dt
-		  FROM notice
-		 WHERE notice_no = #{notice_no}
-  	       AND use_yn = 'Y'
-		 ORDER BY reg_dt DESC
-	</select>
-	
-	<select id="listNotice" parameterType="notice" resultMap="noticeMap"> 
-		SELECT notice_no
-			 , title
-			 , content
-			 , use_yn
-			 , reg_id
-			 , reg_dt
-			 , mod_id
-			 , mod_dt
-		  FROM notice
+			 , DATE_FORMAT(reg_dt,'%Y-%m-%d') regdt
+	    FROM notice
 		  <where>
-		  	<if test="searchType != null and searchType == 'title'">
-		  		AND title like CONCAT('%', #{searchText},'%')
+		  	use_yn = 'Y'
+		  	<if test="type != null and type == 'title'">
+		  		AND title like CONCAT('%', #{text},'%')
 		  	</if>
-		  	<if test="searchType != null and searchType == 'content'">
-		  		AND content like CONCAT('%', #{searchText},'%')
+		  	<if test="type != null and type == 'content'">
+		  		AND content like CONCAT('%', #{text},'%')
 		  	</if>
 		  </where>
-  	       AND use_yn = 'Y'
 		 ORDER BY reg_dt DESC
 	</select>
 		
@@ -68,14 +51,16 @@
 		<set>
 			<if test="title != null">title = #{title},</if>
 			<if test="content != null">content = #{content},</if>
-			<if test="use_yn != null">use_yn = #{use_yn},</if>
+			<if test="mod_id != null">mod_id = #{mod_id},</if>
 		</set>
 		WHERE notice_no = #{notice_no}
 	</update>
 
 	<delete id="deleteNotice" parameterType="notice">
-		delete from notice
-		 where notice_no = #{notice_no}
+		UPDATE notice
+		SET use_yn = 'Y', 
+			mod_id = #{mod_id} 
+		WHERE notice_no = #{notice_no}
 	</delete>
 		
 </mapper>

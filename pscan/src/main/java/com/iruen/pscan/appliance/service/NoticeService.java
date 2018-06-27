@@ -4,7 +4,9 @@
 package com.iruen.pscan.appliance.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.iruen.pscan.vo.Response;
 import com.iruen.pscan.vo.Notice;
 
 /**
@@ -12,9 +14,8 @@ import com.iruen.pscan.vo.Notice;
  *
  */
 public interface NoticeService {
-	public int noticeWrite(Notice notice);
-	public int noticeUpdate(Notice notice);
-	public int noticeDelete(Notice notice);
-	public Notice getNotice(Notice notice);
-	public List<Notice> listNotice(Notice notice);
+	public Response createNotice(Notice notice);
+	public Response updateNotice(Notice notice);
+	public Response deleteNotice(Notice notice);
+	public Response searchNotice(Map<String, String> map);
 }

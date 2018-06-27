@@ -22,7 +22,20 @@ public class Notice extends CommonVO {
 	private String use_yn;
 	private String searchType;
 	private String searchText;
+	private String regdt;
 
+	/**
+	 * @return the regdt
+	 */
+	public String getRegdt() {
+		return regdt;
+	}
+	/**
+	 * @param regdt the regdt to set
+	 */
+	public void setRegdt(String regdt) {
+		this.regdt = regdt;
+	}
 	/**
 	 * @return the notice_no
 	 */
