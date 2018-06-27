@@ -165,6 +165,8 @@ p.loadMenuContents = function(flag) {
 		p.menuURL = '/appliance/policy';
 	} else if ('history' == flag) {
 		p.menuURL = '/appliance/history';
+	} else if ('notice' == flag) {
+		p.menuURL = '/appliance/notice';
 	} else if ('setting' == flag) {
 		p.menuURL = '/appliance/setting';
 	} else if ('main' == flag) {
