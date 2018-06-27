@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iruen.pscan.mapper.FileMapper">
+
+
+	<resultMap id="result_files" type="com.iruen.pscan.vo.UploadFile" >
+		<result property="fileId" 		column="file_id"/>
+		<result property="userIdx" 		column="user_idx"/>
+		<result property="name" 		column="name"/>
+		<result property="orgName" 		column="org_name"/>
+		<result property="savePath" 	column="save_path"/>
+		<result property="ext" 			column="ext"/>
+		<result property="size" 		column="size"/>
+		<result property="mimeType" 	column="mime_type"/>
+		<result property="statusCd" 	column="status_cd"/>
+		<result property="detectCnt" 	column="detect_cnt"/>
+		<result property="reg_id" 		column="reg_id"/>
+		<result property="reg_dt" 		column="reg_dt"/>
+		<result property="mod_id" 		column="mod_id"/>
+		<result property="mod_dt" 		column="mod_dt"/>
+	</resultMap>
+	
+	<insert id="createFile" useGeneratedKeys="true" keyProperty="file_id" parameterType="com.iruen.pscan.vo.UploadFile">	
+		INSERT INTO files (
+			  file_id
+			, user_idx
+			, name
+			, org_name
+			, save_path
+			, ext
+			, size
+			, mime_type
+			, status_cd
+			, detect_cnt
+			, reg_id
+		) VALUES (
+			  #{fileId} 	
+			, #{userIdx} 	
+			, #{name} 	
+			, #{orgName} 	
+			, #{savePath} 
+			, #{ext} 		
+			, #{size} 	
+			, #{mimeType} 
+			, #{statusCd} 
+			, #{detectCnt}
+			, #{reg_id}
+		)
+	</insert>
+	
+	<select id="getFile" resultMap="result_files" parameterType="com.iruen.pscan.vo.UploadFile">
+		SELECT   file_id
+               , user_idx
+               , name
+               , org_name
+               , save_path
+               , ext
+               , size
+               , mime_type
+               , status_cd
+               , detect_cnt
+               , reg_id
+		 FROM files
+		WHERE file_id = #{fileId}
+		  AND user_idx = #{userIdx}
+	</select>
+	
+	<select id="listFiles" resultMap="result_files" parameterType="com.iruen.pscan.vo.UploadFile">
+	   SELECT file_id
+			, user_idx
+			, name
+			, org_name
+			, save_path
+			, ext
+			, size
+			, mime_type
+			, status_cd
+			, detect_cnt
+			<!-- , DATE_FORMAT(reg_dt, '%Y-%m-%d %H:%i:%s') as reg_dt -->
+			, reg_dt
+			, reg_id
+	     FROM files
+       <where>
+		<if test="userIdx != null and userIdx != ''">
+		  AND user_idx = #{userIdx}
+		</if>
+		<if test="statusCd != null and statusCd != ''">
+		  AND status_cd = #{statusCd}
+		</if>
+       </where>
+		ORDER BY reg_dt desc
+	</select>
+	
+	
+	<select id="selectFiles" resultMap="result_files" parameterType="com.iruen.pscan.vo.CheckParam">
+	   SELECT file_id
+			, user_idx
+			, name
+			, org_name
+			, save_path
+			, ext
+			, size
+			, mime_type
+			, status_cd
+			, detect_cnt
+			, reg_dt
+			, reg_id
+	     FROM files
+	    WHERE status_cd = '100'
+	      AND file_id IN 
+		  <foreach collection="fileIds" item="item" index="index" separator="," open="(" close=")">
+		  	  #{item.value}
+		  </foreach>
+	</select>
+	
+	
+	<update id="updateFileStatus" parameterType="com.iruen.pscan.vo.UploadFile">
+		UPDATE files
+		   SET status_cd = #{statusCd}
+		WHERE file_id = #{fileId}
+	</update>
+	
+	
+	<resultMap id="fileResult" type="com.iruen.pscan.vo.CheckFile" >
+		<result property="checkFileId" 		column="check_file_id"/>
+		<result property="fileId" 			column="file_id"/>
+		<result property="checkCnt" 		column="check_cnt"/>
+		<result property="txt" 				column="txt"/>
+		<result property="etc" 				column="etc"/>
+		<result property="reg_id" 			column="reg_id"/>
+		<result property="reg_dt" 			column="reg_dt"/>
+		<result property="mod_id" 			column="mod_id"/>
+		<result property="mod_dt" 			column="mod_dt"/>
+	</resultMap>
+	
+	<resultMap id="checkResultDtl" type="com.iruen.pscan.vo.CheckResultDtl" >
+		<result property="checkIdx" 		column="check_idx"/>
+		<result property="checkFileId" 		column="check_file_id"/>
+		<result property="fileId" 			column="file_id"/>
+		<result property="TYPECD" 			column="TYPECD"/>
+		<result property="searchWord" 		column="searchWord"/>
+		<result property="replaceWord" 		column="replaceWord"/>
+		<result property="page" 			column="page"/>
+		<result property="position" 		column="position"/>
+		<result property="start" 			column="start"/>
+		<result property="end" 				column="end"/>
+		<result property="reg_id" 			column="reg_id"/>
+		<result property="reg_dt" 			column="reg_dt"/>
+		<result property="mod_id" 			column="mod_id"/>
+		<result property="mod_dt" 			column="mod_dt"/>
+	</resultMap>
+	
+	<insert id="createCheckFile" useGeneratedKeys="true" keyProperty="checkFileId" parameterType="com.iruen.pscan.vo.CheckFile">	
+		INSERT INTO check_files (
+			  file_id
+			, check_cnt
+			, txt
+			, etc
+			, reg_id
+		) VALUES (
+			  #{fileId}
+			, #{checkCnt}
+			, #{txt}
+			, #{etc}
+			, #{reg_id}
+		)
+	</insert>
+	
+	<insert id="createCheckResult"  useGeneratedKeys="true" keyProperty="check_idx" parameterType="com.iruen.pscan.vo.CheckResultDtl">
+		INSERT INTO check_result (
+			  check_file_id
+			, file_id       
+			, TYPECD       
+			, searchWord    
+			, replaceWord  
+			, page         
+			, position    
+			, start       
+			, end         
+			, reg_id       
+		) VALUES (
+			  #{checkFileId}
+			, #{fileId}
+			, #{TYPECD}
+			, #{searchWord}	
+			, #{replaceWord}	
+			, #{page}		
+			, #{position}	
+			, #{start}	
+			, #{end}		
+			, #{reg_id}		
+		)
+	</insert>
+	
+</mapper>
