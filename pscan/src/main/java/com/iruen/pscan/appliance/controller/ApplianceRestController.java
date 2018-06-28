@@ -20,6 +20,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.iruen.pscan.appliance.service.ApplianceCommonService;
+import com.iruen.pscan.appliance.service.ApplianceDashboardService;
 import com.iruen.pscan.appliance.service.ApplianceUserService;
 import com.iruen.pscan.appliance.service.AppliancePolicyService;
 import com.iruen.pscan.appliance.service.NoticeService;
@@ -52,9 +53,12 @@ public class ApplianceRestController {
 	@Value("#{db['path.replaceDirs']}")
 	private String replacedPath;
 
-
+	@Value("#{db['dashboard.listlimit']}")
+	private int limit;
+	
 	@Autowired CommonService common;
 	@Autowired ApplianceCommonService appService;
+	@Autowired ApplianceDashboardService dashboardService;
 	@Autowired ApplianceUserService service;
 	@Autowired AppliancePolicyService policyService;	
 	@Autowired NoticeService noticeService;
@@ -213,5 +217,11 @@ public class ApplianceRestController {
 	public Response updatePolicy(@RequestBody Policy policy) {
 		logger.debug("/api/updatePolicy .. "); 
 		return policyService.updatePolicy(policy);
+	}	
+	
+	@PostMapping("/api/dashboardCheckFileList")
+	public Response dashboardCheckFileList() {
+		logger.debug("/api/dashboardCheckFileList .. "); 
+		return dashboardService.dashboardCheckResultLimit(limit);
 	}	
 }

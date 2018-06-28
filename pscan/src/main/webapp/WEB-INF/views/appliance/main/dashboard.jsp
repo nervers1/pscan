@@ -13,6 +13,8 @@
 <link href="/resources/css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/css/appliance/style.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="/resources/jsgrid-1.5.3/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="/resources/jsgrid-1.5.3/jsgrid-theme.min.css" />
 </head>
 <body>
 <div id="content">
@@ -35,6 +37,15 @@
 <script type="text/javascript" src="/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/jQueryFileUpload/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/resources/jsgrid-1.5.3/jsgrid.min.js"></script>
 <script type="text/javascript" src="/resources/js/appliance/main.js"></script>
+<c:choose>
+	<c:when test="${contents eq 'dashboardAdmin'}">
+	<script type="text/javascript" src="/resources/js/appliance/dashboardAdmin.js"></script>
+	</c:when>
+	<c:when test="${contents eq 'dashboardMember'}">
+<script type="text/javascript" src="/resources/js/appliance/dashboardMember.js"></script>
+	</c:when>
+</c:choose>
 </body>
 </html>

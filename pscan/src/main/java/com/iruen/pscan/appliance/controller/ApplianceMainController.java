@@ -329,7 +329,13 @@ public class ApplianceMainController {
 	}
 	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET) 
-	public String dashboard() throws Exception {
+	public String dashboard(Model model, HttpSession session) throws Exception {
+		PSCANSession pss = (PSCANSession)session.getAttribute("Session");
+		if (pss != null && "Y".equals(pss.getAdminYn())) {
+			model.addAttribute("contents", "dashboardAdmin");
+		} else {
+			model.addAttribute("contents", "dashboardMember");
+		}
 		return "appliance/main/dashboard";
 	}
 	

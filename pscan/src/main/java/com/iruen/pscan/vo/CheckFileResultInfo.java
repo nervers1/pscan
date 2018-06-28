@@ -15,11 +15,24 @@ public class CheckFileResultInfo extends CommonVO {
 	private String ext;
 	private String save_path;
 	private String name;
+	private String size;
 	private long check_cnt;
 	private String userId;
 	private String userName;
 	private String regdt;
 	
+	/**
+	 * @return the size
+	 */
+	public String getSize() {
+		return size;
+	}
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(String size) {
+		this.size = size;
+	}
 	/**
 	 * @return the check_file_id
 	 */

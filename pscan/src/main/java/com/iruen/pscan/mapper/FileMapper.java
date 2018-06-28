@@ -38,4 +38,5 @@ public interface FileMapper {
 	
 	public List<CheckFileResultInfo> checkFileList(User user);
 	
+	public List<CheckFileResultInfo> checkFileListLimit(int limit);
 }

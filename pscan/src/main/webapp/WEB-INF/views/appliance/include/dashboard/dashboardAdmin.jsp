@@ -3,6 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <div class="main_block2">
-	<h3>Dash Board Admin</h3>
-	
+	<div class="dashboardHeader">
+		<h2 class="dashboardTitle">대쉬보드</h2> 
+	</div>
+	<div id="gridWrapper"></div>
+	<div id="gridPaging"></div>
+
 </div>

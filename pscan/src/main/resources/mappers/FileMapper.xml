@@ -198,6 +198,7 @@
 		<result property="ext" 				column="ext"/>
 		<result property="save_path" 		column="save_path"/>
 		<result property="name" 			column="name"/>
+		<result property="size" 			column="size"/>
 		<result property="check_cnt" 		column="check_cnt"/>
 		<result property="userId" 			column="userId"/>
 		<result property="userName" 		column="userName"/>
@@ -209,7 +210,8 @@
 		     , f.org_name
 		     , f.ext
 		     , f.save_path
-		     , f.name 
+		     , f.name
+		     , f.size
 		     , c.check_cnt
 		     , u.userId
 		     , u.name as userName
@@ -219,6 +221,25 @@
 		 INNER JOIN user u ON f.user_idx = u.idx
 		 WHERE u.userId = #{userId}
 		 ORDER BY c.reg_dt desc
+	</select>
+	
+	<select id="checkFileListLimit" parameterType="int" resultMap="checkFileMap">
+		SELECT c.check_file_id
+		     , f.org_name
+		     , f.ext
+		     , f.save_path
+		     , f.name
+		     , f.size
+		     , c.check_cnt
+		     , u.userId
+		     , u.name as userName
+		     , DATE_FORMAT(c.reg_dt, '%Y-%m-%d') as regdt
+		  FROM  check_files c 
+		 INNER JOIN files f ON c.file_id = f.file_id
+		 INNER JOIN user u ON f.user_idx = u.idx
+		 ORDER BY c.reg_dt desc
+		 LIMIT #{limit}
+		 
 	</select>
 	
 </mapper>
