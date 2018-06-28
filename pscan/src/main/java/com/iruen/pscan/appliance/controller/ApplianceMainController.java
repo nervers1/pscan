@@ -219,7 +219,6 @@ public class ApplianceMainController {
 	 */
 	@RequestMapping(value = "/policyAdmin", method = RequestMethod.GET)
 	public String policyAdmin(Model model) throws Exception {
-		model.addAttribute("contents", "policy");
 		return "appliance/include/admin/policy";
 	}
 	
@@ -289,6 +288,17 @@ public class ApplianceMainController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequestMapping(value = "/checkResultContents", method = RequestMethod.GET)
+	public String checkResultContents(Model model) throws Exception {
+		return "appliance/include/check/checkResultContents";
+	}
+	
+	/**
+	 * 개인정보검출 컨텐츠
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/historyContents", method = RequestMethod.GET)
 	public String historyContents(Model model) throws Exception {
 		return "appliance/include/check/historyContents";
@@ -303,6 +313,18 @@ public class ApplianceMainController {
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public String check(Model model) throws Exception {
 		model.addAttribute("contents", "check");
+		return "appliance/main/main";
+	}
+	
+	/**
+	 * 개인정보검출결과
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/checkResult", method = RequestMethod.GET)
+	public String checkResult(Model model) throws Exception {
+		model.addAttribute("contents", "checkResult");
 		return "appliance/main/main";
 	}
 	

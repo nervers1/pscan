@@ -1119,3 +1119,22 @@ body {
 	font-weight: bold;
 	cursor: pointer;
 }
+
+.resultArea {
+	width: 900px;
+	height: auto;
+	
+	border: 1px solid brown;
+}
+.checkResultListDiv {
+	margin: 5px;
+	padding: 5px;
+	
+}
+#checkResultList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#checkResultList li {
+}

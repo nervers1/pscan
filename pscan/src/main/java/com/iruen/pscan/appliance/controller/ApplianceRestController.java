@@ -214,5 +214,4 @@ public class ApplianceRestController {
 		logger.debug("/api/updatePolicy .. "); 
 		return policyService.updatePolicy(policy);
 	}	
-	
 }

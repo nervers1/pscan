@@ -92,9 +92,16 @@ check.listFile = function (data) {
 			class: "div-cell text-center",
 			text: item.mimeType
 		});
+		
+		if (item.statusCd == '100') {
+			item.statusName = '업로드완료';
+		} else if (item.statusCd == '200') {
+			item.statusName = '검출완료';
+		}
+		
 		var column5 = $('<div />', {
 			class: "div-cell text-center",
-			text: item.statusCd
+			text: item.statusName
 		});
 		var column6 = $('<div />', {
 			class: "div-cell text-center",
@@ -137,7 +144,8 @@ check.buttonCheck = function(e) {
 		success : function(result) {
 			if (result.status == 'OK') {
 				check.checkResult = result.data;
-				alert(check.checkResult);
+				console.log(check.checkResult);
+				location.replace("/appliance/checkResult");
 			}
 		},
 		error : function(e) {

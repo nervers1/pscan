@@ -106,7 +106,7 @@
 			, reg_dt
 			, reg_id
 	     FROM files
-	    WHERE status_cd = '100'
+	    WHERE status_cd in ('100', '200')
 	      AND file_id IN 
 		  <foreach collection="fileIds" item="item" index="index" separator="," open="(" close=")">
 		  	  #{item.value}

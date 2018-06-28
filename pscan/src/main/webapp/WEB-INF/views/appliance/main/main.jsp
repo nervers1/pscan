@@ -42,6 +42,9 @@
 	<c:when test="${contents eq 'check'}">
 		<c:import url="/appliance/checkContents"/>
 	</c:when>
+	<c:when test="${contents eq 'checkResult'}">
+		<c:import url="/appliance/checkResultContents"/>
+	</c:when>
 	<c:when test="${contents eq 'history'}">
 		<c:import url="/appliance/historyContents"/>
 	</c:when>
@@ -66,6 +69,9 @@
 <c:choose>
 	<c:when test="${contents eq 'check'}">
 <script type="text/javascript" src="/resources/js/appliance/check.js"></script>
+	</c:when>
+	<c:when test="${contents eq 'checkResult'}">
+<script type="text/javascript" src="/resources/js/appliance/checkResult.js"></script>
 	</c:when>
 	<c:when test="${contents eq 'history'}">
 <script type="text/javascript" src="/resources/js/appliance/history.js"></script>
